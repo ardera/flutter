@@ -606,8 +606,9 @@ class CustomDevice extends Device {
 
   @override
   FutureOr<bool> supportsRuntimeMode(BuildMode buildMode) {
-    return buildMode == BuildMode.debug;
+    return buildMode == BuildMode.debug || buildMode == BuildMode.profile;
   }
+ 
 
   @override
   String get name => _config.label;
