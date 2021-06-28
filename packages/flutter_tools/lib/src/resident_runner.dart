@@ -550,7 +550,7 @@ class FlutterDevice {
     }
 
     await startEchoingDeviceLog();
-
+    print('residentRunner');
     final LaunchResult result = await device.startApp(
       package,
       mainPath: coldRunner.mainPath,
