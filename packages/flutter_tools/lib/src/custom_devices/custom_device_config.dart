@@ -21,6 +21,7 @@ class CustomDeviceConfig {
     required this.installCommand,
     required this.uninstallCommand,
     required this.runDebugCommand,
+    required this.runProfileCommand,
     this.forwardPortCommand,
     this.forwardPortSuccessRegex
   }) : assert(forwardPortCommand == null || forwardPortSuccessRegex != null);
@@ -39,6 +40,7 @@ class CustomDeviceConfig {
       installCommand: _castStringList(typedMap[_kInstallCommand]!),
       uninstallCommand: _castStringList(typedMap[_kUninstallCommand]!),
       runDebugCommand: _castStringList(typedMap[_kRunDebugCommand]!),
+      runProfileCommand: _castStringList(typedMap[_kRunProfileCommand]!),
       forwardPortCommand: _castStringListOrNull(typedMap[_kForwardPortCommand]),
       forwardPortSuccessRegex: _convertToRegexOrNull(typedMap[_kForwardPortSuccessRegex])
     );
@@ -54,6 +56,7 @@ class CustomDeviceConfig {
   static const String _kInstallCommand = 'install';
   static const String _kUninstallCommand = 'uninstall';
   static const String _kRunDebugCommand = 'runDebug';
+  static const String _kRunProfileCommand = 'runProfile';
   static const String _kForwardPortCommand = 'forwardPort';
   static const String _kForwardPortSuccessRegex = 'forwardPortSuccessRegex';
 
@@ -69,6 +72,7 @@ class CustomDeviceConfig {
     installCommand: const <String>['scp', '-r', r'${localPath}', r'pi@raspberrypi:/tmp/${appName}'],
     uninstallCommand: const <String>['ssh', 'pi@raspberrypi', r'rm -rf "/tmp/${appName}"'],
     runDebugCommand: const <String>['ssh', 'pi@raspberrypi', r'flutter-pi "/tmp/${appName}"'],
+    runProfileCommand: const <String>['ssh', 'pi@raspberrypi', r'flutter-pi "/tmp/${appName}"'],
     forwardPortCommand: const <String>['ssh', '-o', 'ExitOnForwardFailure=yes', '-L', r'127.0.0.1:${hostPort}:127.0.0.1:${devicePort}', 'pi@raspberrypi'],
     forwardPortSuccessRegex: RegExp('Linux')
   );
@@ -83,6 +87,7 @@ class CustomDeviceConfig {
   final List<String> installCommand;
   final List<String> uninstallCommand;
   final List<String> runDebugCommand;
+  final List<String> runProfileCommand;
   final List<String>? forwardPortCommand;
   final RegExp? forwardPortSuccessRegex;
 
@@ -112,6 +117,7 @@ class CustomDeviceConfig {
       _kInstallCommand: installCommand,
       _kUninstallCommand: uninstallCommand,
       _kRunDebugCommand: runDebugCommand,
+      _kRunProfileCommand: runProfileCommand,
       _kForwardPortCommand: forwardPortCommand,
       _kForwardPortSuccessRegex: forwardPortSuccessRegex?.pattern
     };
@@ -130,6 +136,7 @@ class CustomDeviceConfig {
     List<String>? installCommand,
     List<String>? uninstallCommand,
     List<String>? runDebugCommand,
+    List<String>? runProfileCommand,
     bool explicitForwardPortCommand = false,
     List<String>? forwardPortCommand,
     bool explicitForwardPortSuccessRegex = false,
@@ -146,6 +153,7 @@ class CustomDeviceConfig {
       installCommand: installCommand ?? this.installCommand,
       uninstallCommand: uninstallCommand ?? this.uninstallCommand,
       runDebugCommand: runDebugCommand ?? this.runDebugCommand,
+      runProfileCommand: runProfileCommand ?? this.runProfileCommand,
       forwardPortCommand: explicitForwardPortCommand ? forwardPortCommand : (forwardPortCommand ?? this.forwardPortCommand),
       forwardPortSuccessRegex: explicitForwardPortSuccessRegex ? forwardPortSuccessRegex : (forwardPortSuccessRegex ?? this.forwardPortSuccessRegex)
     );
