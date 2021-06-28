@@ -628,6 +628,7 @@ class CustomDevice extends Device {
     String userIdentifier,
     BundleBuilder bundleBuilder
   }) async {
+    print('hello');
     if (!prebuiltApplication) {
       final String assetBundleDir = getAssetBuildDirectory();
 
