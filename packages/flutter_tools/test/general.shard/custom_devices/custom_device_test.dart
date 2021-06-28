@@ -106,6 +106,7 @@ void main() {
     installCommand: const <String>['testinstall'],
     uninstallCommand: const <String>['testuninstall'],
     runDebugCommand: const <String>['testrundebug'],
+    runProfileCommand: const <String>['testrunprofile'],
     forwardPortCommand: const <String>['testforwardport'],
     forwardPortSuccessRegex: RegExp('testforwardportsuccess')
   );
