@@ -477,7 +477,6 @@ class FlutterDevice {
     await startEchoingDeviceLog();
 
     // Start the application.
-    print('residentRunnerB123');
     final Future<LaunchResult> futureResult = device.startApp(
       package,
       mainPath: hotRunner.mainPath,
@@ -551,7 +550,6 @@ class FlutterDevice {
     }
 
     await startEchoingDeviceLog();
-    print('residentRunnerA123');
     final LaunchResult result = await device.startApp(
       package,
       mainPath: coldRunner.mainPath,
